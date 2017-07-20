@@ -3,11 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Trivia Game</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC|Walter+Turncoat" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<div id="title">Community Trivia</div>
+<div id=titlewrapper>
+<img id="title" src="assets/images/communitylogo2.png">
+<div id="title2">Trivia Game.</div>
+</div>
+<br>
 <div id="mainDiv">
 	<div id="timer"></div>
 	<div id="displayCorrect"></div>
@@ -15,20 +21,17 @@
 	<button id="startButton"></button>
 	<div id="question"></div>
 	<div id="result"></div>
+	<div id="gameEnd"></div>
 	<div id="percentCorrect"></div>
 	<button id="playAgain"></button>
+	<div id=answersWrapper>
 	<p id="answer1" class="answers"></p>
 	<p id="answer2" class="answers"></p>
 	<p id="answer3" class="answers"></p>
 	<p id="answer4" class="answers"></p>
+	</div>
 	<div id="image"></div>
-	
 </div>
-
-
-
-
 <script src="assets/javascript/app.js"></script>
-
 </body>
 </html>

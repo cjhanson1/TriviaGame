@@ -1,6 +1,7 @@
 var questions = [{
-	text: "What is the name of the community college?",
+	text: "What is the official name of the community college?",
 	correctAnswer: "Greendale",
+	image:"assets/images/greendale.jpg",
 	a1: {
 		display: "A.",
 		text:"Greenfield",
@@ -25,6 +26,7 @@ var questions = [{
 {
 	text: "What is the name of the local rival college?",
 	correctAnswer: "City College",
+	image:"assets/images/citycollege.jpg",
 	a1: {
 		display: "A.",
 		text:"City College",
@@ -48,7 +50,8 @@ var questions = [{
 },
 {
 	text: "What was Jeff Winger's profession before he started attending community college?",
-	correctAnswer: "Lawer",
+	correctAnswer: "Lawyer",
+	image:"assets/images/jeffwinger.jpg",
 	a1: {
 		display: "A.",
 		text:"Accountant",
@@ -73,6 +76,7 @@ var questions = [{
 {
 	text: "What is Abed studying?",
 	correctAnswer: "Film",
+	image:"assets/images/abed.jpg",
 	a1: {
 		display: "A.",
 		text:"History",
@@ -97,6 +101,7 @@ var questions = [{
 {
 	text: "What subject was the study group originally set up for?",
 	correctAnswer: "Spanish",
+	image:"assets/images/studygroup.jpg",
 	a1: {
 		display: "A.",
 		text:"Science",
@@ -121,6 +126,7 @@ var questions = [{
 {
 	text: "Why did Annie have to drop out of high school?",
 	correctAnswer: "She was addicted to Adderall",
+	image:"assets/images/annie.jpg",
 	a1: {
 		display: "A.",
 		text:"She got pregnant",
@@ -145,6 +151,7 @@ var questions = [{
 {
 	text: "What was Troy's sport of choice in high school?",
 	correctAnswer: "Football",
+	image:"assets/images/troy.jpg",
 	a1: {
 		display: "A.",
 		text:"Hockey",
@@ -169,6 +176,7 @@ var questions = [{
 {
 	text: "Chang had several roles in the college over the seasons, but what was his first?",
 	correctAnswer: "Spanish Teacher",
+	image:"assets/images/chang.png",
 	a1: {
 		display: "A.",
 		text:"Janitor",
@@ -193,6 +201,7 @@ var questions = [{
 {
 	text: "What is the name of community college's Dean?",
 	correctAnswer: "Craig Pelton",
+	image:"assets/images/craigpelton.jpg",
 	a1: {
 		display: "A.",
 		text:"Craig Pelton",
@@ -217,6 +226,7 @@ var questions = [{
 {
 	text: "Pierce Hawthorne was heir to a company that produced what?",
 	correctAnswer: "Wipes",
+	image:"assets/images/pierce.png",
 	a1: {
 		display: "A.",
 		text:"Sandwiches",
@@ -245,11 +255,11 @@ var tov; //timeout variable
 var iv; //interval variable
 var correctTotal = 0
 var incorrectTotal = 0
-var intervalCount = 10
+var intervalCount = 15
 var percentCorrect = 0
 
 $("#playAgain").hide()
-$("#startButton").html("Start Game").on("click", function() {
+$("#startButton").html("Click here to begin.").on("click", function() {
 	$("#startButton").hide()
 	displayQuestion(questions[currentQuestion])
 })
@@ -257,10 +267,12 @@ $("#startButton").html("Start Game").on("click", function() {
 function displayQuestion(questionNum) {
 if (currentQuestion<10) {
 	$("#result").html("")
+	$("#gameEnd").html("")
+	$("#image").html("")
 	$("#question").html(questionNum.text)
 	$("#displayCorrect").html("Correct: "+correctTotal)
 	$("#displayIncorrect").html("Incorrect: "+incorrectTotal)
-	tov = setTimeout("displayResultOutOfTime()",11000)
+	tov = setTimeout("displayResultOutOfTime()",16000)
 	timer()
 	
 	$("#answer1").html(questionNum.a1.display+" "+questionNum.a1.text).on("click", function() {
@@ -305,10 +317,12 @@ else {
 	$("#percentCorrect").html("You got "+percentCorrect+"%")
 	$("#displayCorrect").html("")
 	$("#displayIncorrect").html("")
+	$("#image").html("")
 	$("#timer").hide()
 	$("#question").hide()
 	$(".answers").hide()
-	$("#result").html("You have completed the Trivia Quiz.")
+	$("#result").html("")
+	$("#gameEnd").html("You have completed the Trivia Quiz.")
 	$("#playAgain").html("Play Again?").on("click",function(){
 		$("#playAgain").off()
 		currentQuestion=0
@@ -328,23 +342,26 @@ else {
 
 function displayResultIncorrect() {
 	$("#result").html("Incorrect. The correct answer was '"+questions[currentQuestion].correctAnswer+".'")
+	$("#image").html("<img src="+questions[currentQuestion].image+" style='width:auto;height:300px;border:solid black 8px'>")
 	currentQuestion++
 	incorrectTotal++
 	$("#displayIncorrect").html("Incorrect: "+incorrectTotal)
 	console.log(currentQuestion)
-	setTimeout("displayQuestion(questions[currentQuestion])",3000)
+	setTimeout("displayQuestion(questions[currentQuestion])",7000)
 }
 function displayResultCorrect() {
-	$("#result").html("Correct")
+	$("#result").html("Correct!")
+	$("#image").html("<img src="+questions[currentQuestion].image+" style='width:auto;height:300px;border:solid black 8px'>")
 	currentQuestion++
 	correctTotal++
 	$("#displayCorrect").html("Correct: "+correctTotal)
 	console.log(currentQuestion)
-	setTimeout("displayQuestion(questions[currentQuestion])",3000)
+	setTimeout("displayQuestion(questions[currentQuestion])",7000)
 
 }
 function displayResultOutOfTime() {
 	$("#result").html("You ran out of time. The correct answer was '"+questions[currentQuestion].correctAnswer+".'")
+	$("#image").html("<img src="+questions[currentQuestion].image+" style='width:auto;height:300px;border:solid black 8px'>")
 	$(".answers").off()
 	clearTimeout(tov)
 	clearInterval(iv)
@@ -352,12 +369,12 @@ function displayResultOutOfTime() {
 	incorrectTotal++
 	$("#displayIncorrect").html("Incorrect: "+incorrectTotal)
 	console.log(currentQuestion)
-	setTimeout("displayQuestion(questions[currentQuestion])",3000)
+	setTimeout("displayQuestion(questions[currentQuestion])",7000)
 }
 
 function timer() {
 	clearInterval(iv)
-	intervalCount = 10
+	intervalCount = 15
 	$("#timer").html("Time Remaining: "+intervalCount+" seconds")
 	iv = setInterval(function(){
 		intervalCount = intervalCount-1
